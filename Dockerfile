@@ -1,4 +1,4 @@
-FROM ghcr.io/gitroomhq/postiz-app:latest
+FROM ghcr.io/gitroomhq/postiz-app:v2.21.6
 
 # Fix Nostr provider: convert hex string to Uint8Array for finalizeEvent
 # This fixes https://github.com/gitroomhq/postiz-app/issues/1148

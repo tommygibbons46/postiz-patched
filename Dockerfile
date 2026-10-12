@@ -30,7 +30,7 @@ RUN node -e " \
     let code = fs.readFileSync(file, 'utf8'); \
     const re = /return(\s*)\{\s*err:\s*true\s*\}\s*;/g; \
     if (re.test(code)) { \
-      code = code.replace(re, 'console.error(\x27[POSTIZ-AUTH-URL-ERROR]\x27, err \x26\x26 err.code, err \x26\x26 err.message, JSON.stringify((err \x26\x26 err.data) || {})); return { err: true };'); \
+      code = code.replace(re, 'console.error(\x27[POSTIZ-AUTH-URL-ERROR]\x27, err \x26\x26 err.code, err \x26\x26 err.message, JSON.stringify((err \x26\x26 err.data) || {}), \x27frontendUrl=\x27 + process.env.FRONTEND_URL, \x27xUrl=\x27 + process.env.X_URL); return { err: true };'); \
       fs.writeFileSync(file, code); \
       console.log('Patched auth-url logging: ' + file); \
     } else { \

@@ -38,3 +38,10 @@ RUN node -e " \
     } \
   }); \
 "
+
+# Log the real provider error when a post fails. Upstream's
+# SocialAbstract.runInConcurrent swallows it and reports "Unknown Error".
+# The script exits non-zero if it finds nothing to patch, so a changed
+# upstream fails the build instead of deploying without the logging.
+COPY patches/log-provider-errors.js /tmp/log-provider-errors.js
+RUN node /tmp/log-provider-errors.js && rm /tmp/log-provider-errors.js

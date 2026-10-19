@@ -45,3 +45,9 @@ RUN node -e " \
 # upstream fails the build instead of deploying without the logging.
 COPY patches/log-provider-errors.js /tmp/log-provider-errors.js
 RUN node /tmp/log-provider-errors.js && rm /tmp/log-provider-errors.js
+
+# Facebook Page stories: settings.post_type 'story' posts the first image as a
+# photo story. Upstream only posts to the feed. Fails the build if the
+# Facebook provider's post() is not where the patch expects it.
+COPY patches/facebook-stories.js /tmp/facebook-stories.js
+RUN node /tmp/facebook-stories.js && rm /tmp/facebook-stories.js

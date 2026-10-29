@@ -51,3 +51,7 @@ RUN node /tmp/log-provider-errors.js && rm /tmp/log-provider-errors.js
 # Facebook provider's post() is not where the patch expects it.
 COPY patches/facebook-stories.js /tmp/facebook-stories.js
 RUN node /tmp/facebook-stories.js && rm /tmp/facebook-stories.js
+
+# Skip X's paid users/me lookup on every post; it only built the post URL.
+COPY patches/skip-x-user-lookup.js /tmp/skip-x-user-lookup.js
+RUN node /tmp/skip-x-user-lookup.js && rm /tmp/skip-x-user-lookup.js
